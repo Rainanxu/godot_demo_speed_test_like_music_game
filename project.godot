@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="speed_test"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://pngs/logo.png"
+boot_splash/fullsize=false
+config/icon="res://pngs/g.png"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1052
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
+window/handheld/orientation=1
+
+[importer_defaults]
+
+animation_library={
+"animation/fps": 60.0
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

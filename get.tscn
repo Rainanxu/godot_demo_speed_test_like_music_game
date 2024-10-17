@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bflnf4nu58e0b"]
+
+[ext_resource type="Script" path="res://get.gd" id="1_dfoth"]
+[ext_resource type="Texture2D" uid="uid://dcrodo1bpug2j" path="res://pngs/lg0.png" id="2_0kcvn"]
+[ext_resource type="Texture2D" uid="uid://boimj37atrotd" path="res://pngs/lg1.png" id="3_jf2o6"]
+[ext_resource type="Texture2D" uid="uid://cspgl1rbm4sgs" path="res://pngs/lg2.png" id="4_8dbwo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cieb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0kcvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jf2o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8dbwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jf2o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0kcvn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ls2cc"]
+a = Vector2(473, 0)
+b = Vector2(-471, 0)
+
+[node name="get" type="Area2D"]
+light_mask = 0
+position = Vector2(370, 861)
+collision_mask = 0
+script = ExtResource("1_dfoth")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.72, 0.72)
+sprite_frames = SubResource("SpriteFrames_6cieb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 69.89)
+shape = SubResource("SegmentShape2D_ls2cc")

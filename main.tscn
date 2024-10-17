@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://di1ei0gnqaydb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nva6t"]
+[ext_resource type="PackedScene" uid="uid://cc0byksex061e" path="res://mob_0.tscn" id="1_v33fg"]
+[ext_resource type="PackedScene" uid="uid://bh0isqyie6xbi" path="res://mob_1.tscn" id="2_sru4r"]
+[ext_resource type="PackedScene" uid="uid://bflnf4nu58e0b" path="res://get.tscn" id="3_bnypk"]
+[ext_resource type="PackedScene" uid="uid://biaq6s7u8stxe" path="res://line_0.tscn" id="5_1l2sd"]
+[ext_resource type="PackedScene" uid="uid://ct0ndi5r7mf2u" path="res://hud.tscn" id="5_oa8it"]
+[ext_resource type="AudioStream" uid="uid://cqhwo8gntgsrs" path="res://music/House In a Forest Loop.ogg" id="7_xq5ta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrx8d"]
+size = Vector2(800, 300)
+
+[sub_resource type="Curve2D" id="Curve2D_q1a4d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -88, 0, 0, 0, 0, 720, -88)
+}
+point_count = 2
+
+[node name="main" type="Node"]
+script = ExtResource("1_nva6t")
+mob_scene0 = ExtResource("1_v33fg")
+mob_scene1 = ExtResource("2_sru4r")
+hud_s = ExtResource("5_oa8it")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(370, 861)
+shape = SubResource("RectangleShape2D_yrx8d")
+
+[node name="mob0" parent="." instance=ExtResource("1_v33fg")]
+
+[node name="mob1" parent="." instance=ExtResource("2_sru4r")]
+position = Vector2(0, -96)
+
+[node name="get" parent="." instance=ExtResource("3_bnypk")]
+angular_damp = 0.0
+
+[node name="Line_s" parent="." instance=ExtResource("5_1l2sd")]
+position = Vector2(368, 847.875)
+
+[node name="Line_e" parent="." instance=ExtResource("5_1l2sd")]
+position = Vector2(376, 1022.56)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="LVTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+scale = Vector2(22.8, 1)
+
+[node name="mobPath2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_q1a4d")
+
+[node name="mobPathFollow2D" type="PathFollow2D" parent="mobPath2D"]
+position = Vector2(0, -88)
+
+[node name="HUD" parent="." instance=ExtResource("5_oa8it")]
+
+[node name="get_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xq5ta")
+
+[connection signal="resized" from="ColorRect" to="." method="get_y_size"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="LVTimer" to="." method="_on_lv_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
