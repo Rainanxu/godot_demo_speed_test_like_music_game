@@ -1,3 +1,5 @@
+MIT License
+
 This game uses Godot Engine, available under the following license:
 
 Copyright (c) 2014-present Godot Engine contributors.
